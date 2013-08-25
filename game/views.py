@@ -126,9 +126,7 @@ def mijnteam(request, saved=None):
                                     'berichten': berichten }, context_instance=RequestContext(request))
     else:
         mijnteam = MijnTeam.objects.get(userprofile=userprofile)
-        form = MijnTeamForm(request.user, instance=mijnteam)
-        
-        
+        form = MijnTeamForm(request.user, instance=mijnteam)        
         
         return render_to_response('mijnteam.html', {'form': form,
                                 'mijnteam': mijnteam,

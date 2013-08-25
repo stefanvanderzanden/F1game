@@ -292,28 +292,3 @@ def update_waardes(request, race):
                                          }, context_instance=RequestContext(request))
         
     #extra idee --> hoogste snelheid op het parcour
-
-@login_required
-def beheerder(request):
-    if request.user.is_staff == True:
-        if request.method == 'POST':
-            #reset all values
-            
-            coureurslist = [
-            {'driverId': 'alonso', 'waarde': 50000000},
-            {'driverId': 'vettel', 'waarde': 50000000},
-            ]
-            
-            for coureur in coureurslist:
-                c = Coureur.objects.get(driverId=coureur['driverId'])
-                c.waarde = coureur['waarde']
-                c.save()
-            
-            return render_to_response('beheerder/beheerder_home.html', {'user':request.user}, context_instance=RequestContext(request))
-        else:
-            return render_to_response('beheerder/beheerder_home.html', {'user':request.user}, context_instance=RequestContext(request))
-    else:
-        userprofile = UserProfile.objects.get(user=request.user.id)
-        mijnteam = MijnTeam.objects.get(userprofile=userprofile)
-        return render_to_response('homepage.html', {'userprofile':userprofile, 'mijnteam': mijnteam}, context_instance=RequestContext(request))
-        

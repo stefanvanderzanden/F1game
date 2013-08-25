@@ -18,7 +18,7 @@ urlpatterns = patterns('',
 	url(r'^mijnteam/$', mijnteam, name='mijnteam'),
 
 	#beheerder
-	url(r'^beheerder/$', beheerder, name='beheerder'),
+	#url(r'^beheerder/$', beheerder, name='beheerder'),
 	#url(r'^beheerder/race_invoeren/(?P<race>\w+)/$', race_invoeren, name='race_invoeren'),
 		
 	#django-admin

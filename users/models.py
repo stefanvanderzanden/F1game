@@ -18,6 +18,7 @@ class ScorePerRaceManager(models.Manager):
 			 team2_coureur2_punten_kwali, team2_coureur2_punten_race,
 			 trivia, snelste_coureur, snelste_pitstop, oude_punten,
 			 totaal_kwali, totaal_race, totaal):
+		
 		score = self.create(race=race,
 				      user=user,
 				      coureur1=coureur1,
@@ -83,7 +84,7 @@ class ScorePerRace(models.Model):
 
 
 	def __unicode__(self):
-		return self.race
+		return self.race.naam
 	
 	
 
@@ -140,7 +141,7 @@ class MijnTeamAdmin(admin.ModelAdmin):
 	list_display =  ['userprofile', 'coureur1', 'coureur2', 'team1', 'team2']
 
 class ScorePerRaceAdmin(admin.ModelAdmin):
-	list_display = ['race']
+	list_display = ['race', 'user', 'totaal']
 
 
 admin.site.register(UserProfile, UserProfileAdmin)

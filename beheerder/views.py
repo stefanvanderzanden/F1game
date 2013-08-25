@@ -122,9 +122,8 @@ def update_waardes(request, race):
                                  punten_race_coureur,
                                  punten_kwali_team,
                                  punten_race_team)
-            '''
-            10-06-2013 TIJDELIJK ERUIT GECOMMENTARIEERD VOOR TESTDOELEINDEN 
-            
+
+
             coureur = Coureur.objects.get(driverId=x['Driver']['driverId'])
             oude_waarde = coureur.waarde
             plus_waarde = WaardeTabel.objects.filter(waarde_type='coureur').get(uitslag=pos).plus_waarde
@@ -145,7 +144,7 @@ def update_waardes(request, race):
                 team.save()
             else:
                 update_waarde_teams[x['Constructor']['constructorId']] = plus_waarde
-            '''
+            
             pos += 1
 
         
@@ -211,7 +210,7 @@ def update_waardes(request, race):
                 team2_coureur2_punten_race = team2_coureur2_punten_race * 2
                 x.jokers -= 1
             
-            #DriveThroughs
+            #DriveThroughs moet zorgen voor punten vermindering
             
             
             
@@ -231,7 +230,8 @@ def update_waardes(request, race):
             nieuwe_punten = oude_punten + verdiende_punten_totaal
             
             
-            ScorePerRace.objects.create_score(race=race,
+            ScorePerRace.objects.create_score(
+                      race=race,
                       user=user,
                       coureur1=coureur1,
                       coureur2=coureur2,

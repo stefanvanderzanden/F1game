@@ -81,7 +81,6 @@ class UitslagPerCoureur(models.Model):
 	
 class ManueleInput(models.Model):
 	race = models.ForeignKey(Race, related_name='manueleinput_race')
-	#snelste_coureur = models.ForeignKey(Coureur, null=True)
 	snelste_pitstop = models.ForeignKey(Team, related_name='manueleinput_team')
 	
 class DriveThrough(models.Model):

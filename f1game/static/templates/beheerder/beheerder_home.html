@@ -18,6 +18,12 @@
 				
 			</ul>
 		</div>
-
+        <div>
+  			<form action="" method="post">
+		    	{% csrf_token %}
+		    	<div>Reset alle waardes weer, van speler en coureurs</div>
+			    <input type="submit" value="Reset">
+			</form>
+        </div>
 
 {% endblock %}

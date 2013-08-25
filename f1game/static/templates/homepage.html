@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block title  %}Homepage {% endblock %}
+
+{% block content %}
+<p>{{ userprofile.volledige_naam }}{{ userprofile.punten }}</p>
+	{% if mijnteam.coureur1 %}	
+	<ul>
+		<li>{{mijnteam.coureur1.naam}}</li>
+		<li>{{mijnteam.coureur2.naam}}</li>
+		<li>{{mijnteam.team1.naam}}</li>
+		<li>{{mijnteam.team2.naam}}</li>
+	</ul>
+	{% endif %}
+	<div id="test">Klik mij</div>
+	<div id="message" style="display:none;">HiHi</div>	
+	<a href="{% url 'mijnteam' %}">Wijzig mijn team</a>
+{% endblock %}

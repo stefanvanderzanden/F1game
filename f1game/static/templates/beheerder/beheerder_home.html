@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block title  %}Homepage Beheerder{% endblock %}
+
+{% block content %}
+<p>{{ user.username }}</p>
+        <div id="nav-bar">
+            <ul>
+				<li><a href="{% url 'update_waardes' 'albert_park' %}">Australie updaten</a></li>
+				<li><a href="{% url 'update_waardes' 'sepang' %}">Maleisie updaten</a></li>
+				<li><a href="{% url 'update_waardes' 'shanghai' %}">China updaten</a></li>
+				<li><a href="{% url 'update_waardes' 'bahrein' %}">Bahrein updaten</a></li>
+				<li><a href="{% url 'update_waardes' 'catalunya' %}">Spanje updaten</a></li>
+				<li><a href="{% url 'update_waardes' 'monaco' %}">Monaco updaten</a></li>
+				<li><a href="{% url 'update_waardes' 'villeneuve' %}">Canada updaten</a></li>
+				<li><a href="{% url 'update_waardes' 'silverstone' %}">Groot-Brittannie updaten</a></li>
+				<li><a href="{% url 'update_waardes' 'nurnburgring' %}">Duitsland updaten</a></li>
+				
+			</ul>
+		</div>
+
+
+{% endblock %}

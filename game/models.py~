@@ -1,0 +1,129 @@
+from django.db import models
+from django.contrib import admin
+
+
+class Team(models.Model):
+	naam = models.CharField(max_length=120)
+	waarde = models.IntegerField(max_length=10)
+	beschrijving = models.TextField(max_length=10000)	
+	
+	def __unicode__(self):
+		return self.naam
+	
+class Coureur(models.Model):
+	naam = models.CharField(max_length=120)
+	waarde = models.IntegerField(max_length=10)
+	team = models.ForeignKey(Team)
+	beschrijving = models.TextField(max_length=10000)
+
+	def __unicode__(self):
+		return self.naam + unicode('U+20AC') + ' ' + str(self.waarde)
+
+class Race(models.Model):
+	naam = models.CharField(max_length=130) 
+	tag = models.CharField(max_length=30)
+	start_training1 = models.DateTimeField()
+	eind_training1 = models.DateTimeField()
+	start_training2 = models.DateTimeField()
+	eind_training2 = models.DateTimeField()
+	start_training3 = models.DateTimeField()
+	eind_training3 = models.DateTimeField()
+	start_kwalificatie = models.DateTimeField()
+	eind_kwalificatie = models.DateTimeField()
+	start_race = models.DateTimeField()
+	eind_race = models.DateTimeField()
+	beschrijving = models.TextField(max_length=10000)
+	#Bij het updaten van de scores moeten deze ook geupdate worden --> de volgende moet ingevuld worden en die is dus niet bezig
+	bezig = models.BooleanField()
+	volgende = models.BooleanField()
+
+	
+	def __unicode__(self):
+		return self.naam	
+	
+
+class ScoreTabel(models.Model):
+	score_type = models.CharField(max_length=20, choices=(('coureur', 'Coureur'), ('motor', 'Motor')))
+	kwali_race = models.CharField(max_length=20, choices=(('kwalificatie', 'Kwalificatie'), ('race', 'Race')))
+	uitslag = models.IntegerField(max_length=2)
+	punten = models.IntegerField(max_length=3)
+	
+	
+class UitslagPerCoureur(models.Model):
+	FINISH = (
+		(10, 'Gefinished'),
+		(-15, 'Uitgevallen, eigen schuld'),
+		(0, 'Uitgevallen, ander schuld')
+	)
+
+	coureur = models.ForeignKey(Coureur, related_name='uitslagcoureur_coureur')
+	race = models.ForeignKey(Race, related_name='uitslagcoureur_race')
+	positie_kwali = models.IntegerField(max_length=2)
+	positie_race = models.IntegerField(max_length=2)
+	finish = models.IntegerField(max_length=1, choices=FINISH)
+	drivethrough = models.BooleanField(default=False)
+	
+
+class ExtraPuntenPerRace(models.Model):
+	race = models.ForeignKey(Race)
+	snelste_coureur = models.ForeignKey(Coureur)
+	snelste_pitstop = models.ForeignKey(Team)
+	
+class Trivia(models.Model):
+
+	race = models.ForeignKey(Race)
+	vraag = models.CharField(max_length=100)
+	antwoordA = models.CharField(max_length=25)
+	correctA = models.BooleanField()
+	antwoordB = models.CharField(max_length=25)
+	correctB = models.BooleanField()
+	antwoordC = models.CharField(max_length=25)
+	correctC = models.BooleanField()
+	antwoordD = models.CharField(max_length=25)
+	correctD = models.BooleanField()
+
+
+class TeamAdmin(admin.ModelAdmin):
+    list_display = ['naam', 'waarde', 'beschrijving']
+    list_filter = ['waarde']
+    ordering = ['-waarde']
+
+class CoureurAdmin(admin.ModelAdmin):
+    list_display = ['naam', 'waarde', 'team', 'beschrijving']
+    list_filter = ['team']
+    ordering = ['-waarde']
+
+class UitslagRaceAdmin(admin.ModelAdmin):
+    list_display = ['race']
+    ordering = ['race']
+
+class ScoreTabelAdmin(admin.ModelAdmin):
+	list_display = ['score_type', 'kwali_race', 'uitslag',  'punten']
+	list_filter = ['score_type', 'kwali_race']
+	ordering = ['score_type', 'kwali_race', 'uitslag']
+
+class RaceAdmin(admin.ModelAdmin):
+	list_display = ['naam', 'start_training1', 'eind_race']
+	ordering = ['start_training1']
+
+class UitslagPerCoureurAdmin(admin.ModelAdmin):
+	list_display = ['race', 'coureur', 'positie_race', 'positie_kwali', 'finish', 'drivethrough']
+	list_filter = ['race', 'coureur' ]
+	ordering = ['race', 'positie_race' ]
+	
+class ExtraPuntenPerRaceAdmin(admin.ModelAdmin):
+	list_display = ['race', 'snelste_coureur', 'snelste_pitstop']
+	ordering = ['id']
+	
+class TriviaAdmin(admin.ModelAdmin):
+	list_display = ['vraag', 'antwoordA', 'antwoordB', 'antwoordC', 'antwoordD']
+	ordering = ['id']
+    
+admin.site.register(Team, TeamAdmin)
+admin.site.register(Coureur, CoureurAdmin)
+admin.site.register(ScoreTabel, ScoreTabelAdmin)
+admin.site.register(Race, RaceAdmin)
+admin.site.register(UitslagPerCoureur, UitslagPerCoureurAdmin)
+admin.site.register(ExtraPuntenPerRace, ExtraPuntenPerRaceAdmin)
+admin.site.register(Trivia, TriviaAdmin)
+

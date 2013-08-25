@@ -1,0 +1,162 @@
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
+import datetime, time
+from django.core.urlresolvers import reverse
+
+
+from users.forms import *
+from game.forms import *
+from game.models import *
+from users.models import *
+	
+
+@login_required
+def beheerder(request):
+	if request.user.is_staff == True:
+		return render_to_response('beheerder/beheerder_home.html', {'user':request.user}, context_instance=RequestContext(request))
+	else:
+		userprofile = UserProfile.objects.get(user=request.user.id)
+		mijnteam = MijnTeam.objects.get(userprofile=userprofile)
+		return render_to_response('homepage.html', {'userprofile':userprofile, 'mijnteam': mijnteam}, context_instance=RequestContext(request))
+
+@login_required
+def race_invoeren(request, race):
+	race = Race.objects.get(tag=race)
+	if request.method == 'POST':
+		#Toekennen aan alle gebruikers
+		gebruikers = MijnTeam.objects.all()
+
+		#for gebruiker in gebruikers:
+			#bepaal posities van opgeslagen team
+		gebruiker = gebruikers[0]
+		userprofile = UserProfile.objects.get(id=gebruiker.userprofile.id)
+		
+		uitslag_coureur1 = UitslagPerCoureur.objects.get(coureur=gebruiker.coureur1)
+		uitslag_coureur2 = UitslagPerCoureur.objects.get(coureur=gebruiker.coureur2)
+		uitslag_team1 = UitslagPerCoureur.objects.filter(coureur__team=gebruiker.team1)
+		uitslag_team2 = UitslagPerCoureur.objects.filter(coureur__team=gebruiker.team2)			
+
+		pos_c1k = uitslag_coureur1.positie_kwali
+		pos_c1r = uitslag_coureur1.positie_race
+		pos_c2k = uitslag_coureur2.positie_kwali
+		pos_c2r = uitslag_coureur2.positie_race
+		pos_t1_1k = uitslag_team1[0].positie_kwali
+		pos_t1_1r = uitslag_team1[0].positie_race
+		pos_t1_2k = uitslag_team1[1].positie_kwali
+		pos_t1_2r = uitslag_team1[1].positie_race
+		pos_t2_1k = uitslag_team2[0].positie_kwali
+		pos_t2_1r = uitslag_team2[0].positie_race
+		pos_t2_2k = uitslag_team2[1].positie_kwali
+		pos_t2_2r = uitslag_team2[1].positie_race
+		
+		#aantal punten bepalen
+		
+		score_c1k = ScoreTabel.objects.get(score_type='coureur', kwali_race='kwalificatie', uitslag=pos_c1k).punten
+		score_c1r = ScoreTabel.objects.get(score_type='coureur', kwali_race='race', uitslag=pos_c1r).punten
+
+
+		score_c2k = ScoreTabel.objects.get(score_type='coureur', kwali_race='kwalificatie', uitslag=pos_c2k).punten
+		score_c2r = ScoreTabel.objects.get(score_type='coureur', kwali_race='race', uitslag=pos_c2k).punten
+
+		score_t1_1k = ScoreTabel.objects.get(score_type='motor', kwali_race='kwalificatie', uitslag=pos_t1_1k).punten
+		score_t1_1r = ScoreTabel.objects.get(score_type='motor', kwali_race='race', uitslag=pos_t1_1r).punten
+
+		score_t1_2k = ScoreTabel.objects.get(score_type='motor', kwali_race='kwalificatie', uitslag=pos_t1_2k).punten
+		score_t1_2r = ScoreTabel.objects.get(score_type='motor', kwali_race='race', uitslag=pos_t1_2r).punten
+
+		score_t2_1k = ScoreTabel.objects.get(score_type='motor', kwali_race='kwalificatie', uitslag=pos_t2_1k).punten
+		score_t2_1r = ScoreTabel.objects.get(score_type='motor', kwali_race='race', uitslag=pos_t2_1r).punten
+
+		score_t2_2k = ScoreTabel.objects.get(score_type='motor', kwali_race='kwalificatie', uitslag=pos_t2_2k).punten
+		score_t2_2r = ScoreTabel.objects.get(score_type='motor', kwali_race='race', uitslag=pos_t2_2r).punten
+		
+		som = ( score_c1k + 
+				score_c1r +
+				score_c2k +
+				score_c2r +
+				score_t1_1k + 
+				score_t1_1r +
+				score_t1_2k +
+				score_t1_2r +
+				score_t2_1k +
+				score_t2_1r +
+				score_t2_2k +
+				score_t2_2r )
+		
+		
+		#create ScorePerRace
+		scoreperrace = ScorePerRace()
+		scoreperrace.race = race
+		scoreperrace.score_coureur1_kwali = score_c1k
+		scoreperrace.score_coureur2_kwali = score_c2k
+		scoreperrace.score_team1_1_kwali = score_t1_1k
+		scoreperrace.score_team1_2_kwali = score_t1_2k
+		scoreperrace.score_team2_1_kwali = score_t2_1k
+		scoreperrace.score_team2_2_kwali = score_t2_2k
+		
+		scoreperrace.score_coureur1_race = score_c1r
+		scoreperrace.score_coureur2_race = score_c2r
+		scoreperrace.score_team1_1_race = score_t1_1r
+		scoreperrace.score_team1_2_race = score_t1_2r
+		scoreperrace.score_team2_1_race = score_t2_1r
+		scoreperrace.score_team2_2_race = score_t2_2r
+		
+		scoreperrace.finish_coureur1_race = uitslag_coureur1.finish
+		scoreperrace.finish_coureur2_race = uitslag_coureur1.finish
+		scoreperrace.finish_team1_1_race = uitslag_team1[0].finish
+		scoreperrace.finish_team1_2_race = uitslag_team1[1].finish
+		scoreperrace.finish_team2_1_race = uitslag_team2[0].finish
+		scoreperrace.finish_team2_2_race = uitslag_team2[1].finish
+		
+		scoreperrace.drivet_coureur1_race = -15 if uitslag_coureur1.drivethrough else 0
+		scoreperrace.drivet_coureur2_race = -15 if uitslag_coureur1.drivethrough else 0
+		scoreperrace.drivet_team1_1_race = -15 if uitslag_team1[0].drivethrough else 0
+		scoreperrace.drivet_team1_2_race = -15 if uitslag_team1[1].drivethrough else 0
+		scoreperrace.drivet_team2_1_race = -15 if uitslag_team2[0].drivethrough else 0
+		scoreperrace.drivet_team2_2_race = -15 if uitslag_team2[1].drivethrough else 0
+		
+		trivia = scoreperrace.score_trivia = 25
+		snelste_coureur = scoreperrace.score_snelste_coureur = 25
+		snelste_pitstop = scoreperrace.score_snelste_pitstop = 25
+		
+		stotk = score_c1k + score_c2k + score_t1_1k + score_t1_2k + score_t2_1k + score_t2_2k
+		stotr = score_c1r + score_c2r + score_t1_1r + score_t1_2r + score_t2_1r + score_t2_2r
+		scoreperrace.totaal_kwali = stotk
+		scoreperrace.totaal_race = stotr
+
+		scoreperrace.totaal = (	stotk + stotr + trivia + snelste_coureur + snelste_pitstop)
+		#Link aan goede userprofile
+		scoreperrace.save()
+				
+		gebruiker.userprofile.score_race1 = scoreperrace
+		gebruiker.save()
+		if not userprofile.punten:
+			userprofile.punten = 0
+		userprofile.punten += scoreperrace.totaal
+		userprofile.save()
+		
+
+		som+= uitslag_team2[1].finish
+		pers_uitslag = {
+			'punten': userprofile.punten
+			}
+			
+		#UPDATE ACTIEVE RACE WEEKEND --> NEXT RACE
+		
+				
+		return render_to_response('beheerder/race_invoeren.html', {'race': race, 'pers_uitslag': pers_uitslag}, context_instance=RequestContext(request))		
+		
+	else:
+		uitslagcoureurs = UitslagPerCoureur.objects.filter(race=race)
+		uitslagen = []
+		for uitslag in uitslagcoureurs:
+			uitslagen.append({'coureur': uitslag.coureur, 'race': uitslag.race, 'positie_kwali': uitslag.positie_kwali, 'positie_race': uitslag.positie_race})
+			
+			
+		return render_to_response('beheerder/race_invoeren.html', {'uitslagen': uitslagen, 'race': race}, context_instance=RequestContext(request))
+		
+		
+		
+		

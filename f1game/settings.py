@@ -6,7 +6,7 @@ TEMPLATE_DEBUG = DEBUG
 PROJECT_HOME = os.path.dirname(os.path.realpath(__file__))
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Stefan van der Zanden', 'stefan.vanderzanden@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -19,7 +19,7 @@ DATABASES = {
         'NAME': 'f1game',                      # Or path to database file if using sqlite3.
         'USER': 'f1game',                      # Not used with sqlite3.
         'PASSWORD': 'f1game',                  # Not used with sqlite3.
-        'HOST': '/var/run/mysqld/mysqld.sock',                      # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }

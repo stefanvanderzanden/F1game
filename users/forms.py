@@ -28,8 +28,7 @@ class CreateUserForm(forms.Form):
 
 
 class MijnTeamForm(forms.ModelForm):
-    trivia = Trivia.objects.get(race__is_aankomende_race=True)
-
+    
     class Meta:
         model = MijnTeam
         exclude = ['userprofile']
@@ -37,31 +36,33 @@ class MijnTeamForm(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super(MijnTeamForm, self).__init__(*args, **kwargs)
         self.user = user
-        '''
-        Op volgorde zetten van waardes
-        '''
+        
+        #Op volgorde zetten van waardes
+        
         self.fields['coureur1'].queryset=Coureur.objects.all().order_by('-waarde')
         self.fields['coureur2'].queryset=Coureur.objects.all().order_by('-waarde')
         self.fields['team1'].queryset=Team.objects.all().order_by('-waarde')
         self.fields['team2'].queryset=Team.objects.all().order_by('-waarde')
         
+        try:
+            trivia = Trivia.objects.get(race__is_aankomende_race=True)
 
-        antwoordA = Trivia.objects.get(race__is_aankomende_race=True).antwoordA
-        antwoordB = Trivia.objects.get(race__is_aankomende_race=True).antwoordB
-        antwoordC = Trivia.objects.get(race__is_aankomende_race=True).antwoordC
-        antwoordD = Trivia.objects.get(race__is_aankomende_race=True).antwoordD
+            antwoordA = Trivia.objects.get(race__is_aankomende_race=True).antwoordA
+            antwoordB = Trivia.objects.get(race__is_aankomende_race=True).antwoordB
+            antwoordC = Trivia.objects.get(race__is_aankomende_race=True).antwoordC
+            antwoordD = Trivia.objects.get(race__is_aankomende_race=True).antwoordD
 
-        self.fields['trivia_antwoord'] = forms.ChoiceField(choices=(
-        ('A', antwoordA),
-        ('B', antwoordB),
-        ('C', antwoordC),
-        ('D', antwoordD)), widget=forms.RadioSelect, required=False)
+            self.fields['trivia_antwoord'] = forms.ChoiceField(choices=(
+            ('A', antwoordA),
+            ('B', antwoordB),
+            ('C', antwoordC),
+            ('D', antwoordD)), widget=forms.RadioSelect, required=False)
+        except:
+            pass
         
+
+        #Zorgen dat het label in de dropdown menu's goed zijn.
         
-        
-        '''
-        Zorgen dat het label in de dropdown menu's goed zijn.
-        '''
         self.fields['coureur1'].label_from_instance = lambda obj: obj.naam + ' (' + u'€' + ' {0:,}'.format(obj.waarde).replace(',','.') + ')'
         self.fields['coureur2'].label_from_instance = lambda obj: obj.naam + ' (' + u'€' + ' {0:,}'.format(obj.waarde).replace(',','.') + ')'
         self.fields['team1'].label_from_instance = lambda obj: obj.naam + ' (' + u'€' + ' {0:,}'.format(obj.waarde).replace(',','.') + ')'
@@ -102,4 +103,5 @@ class MijnTeamForm(forms.ModelForm):
 
 
         return self.cleaned_data            
+
 

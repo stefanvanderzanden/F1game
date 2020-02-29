@@ -1,12 +1,9 @@
-from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-import datetime, time
 from django.utils import timezone
 from django.core.urlresolvers import reverse
-import urllib2
-from game.models import *
+from apps.game.models import *
 from users.forms import *
 
 

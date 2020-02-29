@@ -4,7 +4,7 @@ import time
 from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.admin import widgets
 
-from game.models import *
+from apps.game.models import *
 
 '''
 class UitslagRaceForm(forms.ModelForm):

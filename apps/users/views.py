@@ -1,6 +1,4 @@
-from django import forms
 from django.template import RequestContext
-from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
@@ -8,8 +6,7 @@ from django.contrib.auth import logout
 
 from users.forms import *
 
-from game.models import *
-from users.models import *
+from apps.users.models import *
 
 def registreren(request):
 	if request.method == 'POST':

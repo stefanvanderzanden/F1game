@@ -4,7 +4,7 @@ admin.autodiscover()
 
 from game.views import *
 from users.views import *
-from beheerder.views import *
+from apps.beheerder.views import *
 
 urlpatterns = patterns('',
 	url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),

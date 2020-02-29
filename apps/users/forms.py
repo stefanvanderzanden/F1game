@@ -9,8 +9,8 @@ from django.contrib.admin import widgets
 from django.utils.safestring import mark_safe
 
 
-from users.models import *
-from game.models import Trivia
+from apps.users.models import *
+from apps.game.models import Trivia
 
 class CreateUserForm(forms.Form):    
     GENDER = (

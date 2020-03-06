@@ -1,0 +1,392 @@
+[
+{
+    "model": "game.team",
+    "pk": 1,
+    "fields": {
+        "name": "Mercedes",
+        "value": 50000000,
+        "description": "",
+        "image": "",
+        "order": 1
+    }
+},
+{
+    "model": "game.team",
+    "pk": 2,
+    "fields": {
+        "name": "Haas F1 Team",
+        "value": 30000000,
+        "description": "",
+        "image": "",
+        "order": 9
+    }
+},
+{
+    "model": "game.team",
+    "pk": 3,
+    "fields": {
+        "name": "McLaren",
+        "value": 35000000,
+        "description": "",
+        "image": "",
+        "order": 4
+    }
+},
+{
+    "model": "game.team",
+    "pk": 4,
+    "fields": {
+        "name": "Alfa Romeo Racing",
+        "value": 28000000,
+        "description": "",
+        "image": "",
+        "order": 8
+    }
+},
+{
+    "model": "game.team",
+    "pk": 5,
+    "fields": {
+        "name": "Red Bull Racing",
+        "value": 47000000,
+        "description": "",
+        "image": "",
+        "order": 3
+    }
+},
+{
+    "model": "game.team",
+    "pk": 6,
+    "fields": {
+        "name": "Renault",
+        "value": 36000000,
+        "description": "",
+        "image": "",
+        "order": 5
+    }
+},
+{
+    "model": "game.team",
+    "pk": 7,
+    "fields": {
+        "name": "Ferrari",
+        "value": 49000000,
+        "description": "",
+        "image": "",
+        "order": 2
+    }
+},
+{
+    "model": "game.team",
+    "pk": 8,
+    "fields": {
+        "name": "AlphaTauri",
+        "value": 29000000,
+        "description": "",
+        "image": "",
+        "order": 6
+    }
+},
+{
+    "model": "game.team",
+    "pk": 9,
+    "fields": {
+        "name": "Williams",
+        "value": 25000000,
+        "description": "",
+        "image": "",
+        "order": 10
+    }
+},
+{
+    "model": "game.team",
+    "pk": 10,
+    "fields": {
+        "name": "Racing point",
+        "value": 32000000,
+        "description": "",
+        "image": "",
+        "order": 7
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 1,
+    "fields": {
+        "name": "Lewis Hamilton",
+        "number": 1,
+        "value": 50000000,
+        "team": 1,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 1
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 2,
+    "fields": {
+        "name": "Valtteri Bottas",
+        "number": 77,
+        "value": 45000000,
+        "team": 1,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 2
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 3,
+    "fields": {
+        "name": "Sebastian Vettel",
+        "number": 5,
+        "value": 45000000,
+        "team": 7,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 1
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 4,
+    "fields": {
+        "name": "Charles Leclerc",
+        "number": 16,
+        "value": 42000000,
+        "team": 7,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 2
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 5,
+    "fields": {
+        "name": "Max Verstappen",
+        "number": 33,
+        "value": 44000000,
+        "team": 5,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 1
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 6,
+    "fields": {
+        "name": "Alexander Albon",
+        "number": 23,
+        "value": 39000000,
+        "team": 5,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 2
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 7,
+    "fields": {
+        "name": "Calos Sainz",
+        "number": 55,
+        "value": 31000000,
+        "team": 3,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 1
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 8,
+    "fields": {
+        "name": "Lando Norris",
+        "number": 4,
+        "value": 26000000,
+        "team": 3,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 2
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 9,
+    "fields": {
+        "name": "Daniel Ricciardo",
+        "number": 3,
+        "value": 34000000,
+        "team": 6,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 1
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 13,
+    "fields": {
+        "name": "Esteban Ocon",
+        "number": 31,
+        "value": 26000000,
+        "team": 6,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 2
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 14,
+    "fields": {
+        "name": "Pierre Gasly",
+        "number": 10,
+        "value": 23000000,
+        "team": 8,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 1
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 15,
+    "fields": {
+        "name": "Danill Kvyat",
+        "number": 26,
+        "value": 21000000,
+        "team": 8,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 2
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 16,
+    "fields": {
+        "name": "Sergio Perez",
+        "number": 11,
+        "value": 27000000,
+        "team": 10,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 1
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 17,
+    "fields": {
+        "name": "Lance Stroll",
+        "number": 18,
+        "value": 22000000,
+        "team": 10,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 2
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 18,
+    "fields": {
+        "name": "Kimi R\u00e4ikk\u00f6nen",
+        "number": 7,
+        "value": 19000000,
+        "team": 4,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 1
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 19,
+    "fields": {
+        "name": "Antonio Giovinazzi",
+        "number": 99,
+        "value": 18000000,
+        "team": 4,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 2
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 20,
+    "fields": {
+        "name": "Romain Grosjean",
+        "number": 8,
+        "value": 20000000,
+        "team": 2,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 1
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 21,
+    "fields": {
+        "name": "Kevin Magnussen",
+        "number": 20,
+        "value": 17000000,
+        "team": 2,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 2
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 22,
+    "fields": {
+        "name": "George Russel",
+        "number": 63,
+        "value": 14000000,
+        "team": 9,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 1
+    }
+},
+{
+    "model": "game.driver",
+    "pk": 23,
+    "fields": {
+        "name": "Nicholas Latifi",
+        "number": 6,
+        "value": 12000000,
+        "team": 9,
+        "description": "",
+        "image": "",
+        "active": true,
+        "order": 2
+    }
+}
+]

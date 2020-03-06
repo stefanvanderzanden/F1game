@@ -3,3 +3,5 @@
 *.py~
 
 .idea
+
+_project/settings/__init__.py

@@ -1,128 +1,59 @@
-body {
-	margin: 0;
-	padding: 0;
-	color: #4A4A4A;
-	font: 13px Verdana, Geneva, sans-serif;
-	line-height: 1.6em;
+html,
+body,
+.main-container, .main-container.login, .main-container > .container-fluid, .main-container > .container-fluid > .row {
+    height: 100%;
 }
 
-#header {
-	background: #598FC9;
-	height: 33px;
+/* NAVIGATION */
+nav {
+    height: 65px;
 }
 
-#main-container {
-	width: 960px;
-	margin: 0px auto;
-
+main.logged-in {
+    margin-top: 95px;  /* 65 for the height of the nav and 30 px for the margin itself */
 }
 
-#footer-container {
-	clear: both;
-	padding: 10px 0 20px;
-	background: #4A4A49;
-	color: white;
-	height: 295px;
-	font-size: 11px;
+/*main.logged-in > .container {*/
+/*    margin-top: 30px;*/
+/*}*/
+
+/* LOGIN PAGE */
+.login-row {
+    background-image: url("/static/img/front-page.jpg");
+    background-position-y: 60%;
+    opacity: 0.8;
 }
 
-.clear {
-    clear: both;
+.login-card-header {
+  padding-top: 20px;
+  padding-left: 20px;
+  margin-bottom: 15px;
 }
 
-/***************************************HOMEPAGE***************************/
-#nav-bar {
-	float: left;
-	width: 200px;
-	margin-right: 40px;
+.login-card-header a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: #000000;
+    font-weight: 300;
+    font-size: 20px;
+    margin-right: 10px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-#nav-bar ul {
-	list-style: none;
-	background: #CCCCCC;
-	padding-left: 0px;	
-	-webkit-border-top-left-radius: 5px;
-	-webkit-border-top-right-radius: 5px;
-	-moz-border-radius-topleft: 5px;
-	-moz-border-radius-topright: 5px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+.login-card-header a:after {
+    background-color: rgba(222, 222, 222, 0.7);
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 3px;
+    left: 0;
+    bottom: -10px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-#nav-bar ul li {
-	border-bottom: 1px solid #A4A4A4;
-}
-
-#nav-bar ul li a {
-	text-decoration: none;
-	display: block;
-	color: #4A4A4A;
-	padding: 5px 0px 5px 15px;
-}
-
-#nav-bar ul li a:hover {
-	background-color: #EEEEEE;
-}
-
-/***********************************MIJN TEAM**********************************/
-#mijnteam_header {
-	width: 960px;
-}
-
-#mijnteam_container {
-	width: 960px;
-}
-
-#mijnteam_team {
-	width: 700px;
-	float: left;
-}
-
-.selection {
-	width: 160px;
-	/*height: 250px;*/
-}
-
-.selection input[type="select"] {
-	background: red;
-
-}
-
-#mijnteam_trivia {
-	width: 250px;
-	float: left;
-	padding: 5px;
-}
-
-#mijnteam_trivia_header {
-	color: #4a4a4a;
-	font-size: 18px;
-	background: #f1f1f5;
-	padding: 5px;
-	-webkit-border-top-left-radius: 5px;
-	-webkit-border-top-right-radius: 5px;
-	-moz-border-radius-topleft: 5px;
-	-moz-border-radius-topright: 5px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border-top: 1px solid black;
-	border-left: 1px solid black;
-	border-right: 1px solid black;	
-}
-
-
-#mijnteam_trivia_answers {
-	padding: 5px;
-	border: 1px solid black;
-	
-}
-
-#mijnteam_trivia ul {
-	list-style: none;
-	margin-left: -35px;
-
-}
-
-#mijnteam_trivia ul li {
-
+.login-card-header a.active:after, .login-card-header a:hover:after {
+    background-color: #005cbf;
 }

@@ -1,0 +1,36 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres
+    container_name: f1game-db
+    ports:
+      - "54329:5432"
+    environment:
+      - POSTGRES_USER=f1game
+      - POSTGRES_PASSWORD=f1game
+      - POSTGRES_DB=f1game
+    volumes:
+      - postgres:/var/lib/postgres
+  web:
+    image: f1game:latest
+    container_name: f1game-web
+    build: ""
+    command: >
+        bash -c "python3 manage.py migrate && \
+                 echo 'Starting server' &&  \
+                 python3 manage.py runserver 0.0.0.0:8000"
+#        bash -c "python3 manage.py makemigrations && \
+#                 python3 manage.py migrate && \
+#                 echo 'Starting server' &&  \
+#                 python3 manage.py runserver 0.0.0.0:8000"
+
+    volumes:
+      - ./:/app
+    ports:
+      - "19000:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres:

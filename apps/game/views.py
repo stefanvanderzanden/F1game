@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.core.urlresolvers import reverse
-from apps.game.models import *
+from apps.accounts.models import *
 from users.forms import *
 
 

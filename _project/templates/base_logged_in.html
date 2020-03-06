@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="d-flex justify-content-center" style="width: 100%;">
+        <h3 style="color: white;">Formula1 Manager</h3>
+    </div>
+    <div class="">
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'accounts:auth:logout' %}" class="btn btn-light">logout</a>
+        {% endif %}
+    </div>
+</nav>
+{% endblock %}
+
+{% block extra_main_classes %}class="logged-in"{% endblock %}

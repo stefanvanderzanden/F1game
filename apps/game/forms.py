@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
 import time
-from django.forms.extras.widgets import SelectDateWidget
-from django.contrib.admin import widgets
+# from django.forms.extras.widgets import SelectDateWidget
+# from django.contrib.admin import widgets
 
-from apps.game.models import *
+# from apps.accounts.models import *
 
 '''
 class UitslagRaceForm(forms.ModelForm):

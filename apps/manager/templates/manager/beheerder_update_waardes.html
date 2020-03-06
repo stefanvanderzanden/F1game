@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title  %}Homepage Beheerder{% endblock %}
+
+{% block content %}
+<h1>Race: {{algemene_data.huidige_race.racenaam}}</h1>
+<p>Snelste ronde: {{algemene_data.huidige_race.snelste_ronde}}</p>
+<form action="" method="post">
+{% csrf_token %}
+    <table>
+	<tr>
+	    <th>Naam</th>
+	    <th>Positie Race</th>
+	    <th>Punten Race</th>
+	    <th>Status</th>
+	    <th>Positie Kwalificatie</th>
+	    <th>Punten Kwalificatie</th>
+	    <th>Oude waarde</th>
+	    <th>Nieuwe waarde</th>
+	</tr>
+	{% for uitslag in uitslagen_coureurs.values %}
+	<tr>
+	    <td>{{uitslag.coureur}}</td>
+	    <td>{{uitslag.positie}}</td>
+	    <td>{{uitslag.punten_race}}</td>
+	    <td>{{uitslag.status}}</td>
+	    <td>{{uitslag.grid}}</td>
+	    <td>{{uitslag.punten_kwali}}</td>
+	    <td>{{uitslag.oude_waarde}}</td>
+	    <td>{{uitslag.nieuwe_waarde}}</td>
+	</tr>   
+	{% endfor%}
+    </table>
+    <br /><br />
+    <table>
+	<tr>
+	    <td>Naam</td>
+	</tr>
+	{% for uitslag in uitslagen_teams.values %}
+	<tr>
+	    <td>{{uitslag.team}}</td>
+	    <td>{{uitslag.oude_waarde}}</td>
+	    <td>{{uitslag.nieuwe_waarde}}</td>
+	    <td>{{uitslag.temp_waarde}}</td>
+	</tr>
+	{% endfor %}
+    </table>
+    <table>
+	<tr>
+	    <td><input type="submit" value="Opslaan">
+	</td>
+	</tr>
+    </table>
+</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Stefan van der Zanden">
+    <title>Formula1 Manager Game</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap-4.4.1-dist/css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+{% block nav %}{% endblock %}
+
+<main role="main" {% block extra_main_classes %}{% endblock %}>
+    {% block main_content %}{% endblock %}
+</main>
+{#    <main role="main" class="container {% block container_class %}{% endblock %}">#}
+{#        {% block content %}{% endblock %}#}
+{#    </main>#}
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap-4.4.1-dist/js/bootstrap.js' %}"></script>
+</body>
+</html>

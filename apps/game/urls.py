@@ -19,5 +19,12 @@ urlpatterns = [
         path('add/', TeamAddView.as_view(), name='add'),
         path('edit/<int:team_id>/', TeamEditView.as_view(), name='edit'),
         ], 'teams')),
-    )
+    ),
+    path('seasons/', include(([
+        path('', SeasonListView.as_view(), name='list'),
+        path('add/', SeasonAddView.as_view(), name='add'),
+        path('edit/<int:season_id>/', SeasonEditView.as_view(), name='edit'),
+        ], 'seasons')),
+     )
+
 ]

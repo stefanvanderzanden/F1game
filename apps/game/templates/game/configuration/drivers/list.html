@@ -13,8 +13,9 @@
                     <th>Name</th>
                     <th>Number</th>
                     <th>Team</th>
-                    <th>Value</th>
                     <th>Order</th>
+                    <th>Value</th>
+                    <th>Season</th>
                     <th>Actions</th>
                 </tr>
                 {% for object in object_list %}
@@ -24,6 +25,7 @@
                     <td>{{ object.team.name }}</td>
                     <td>{{ object.order }}</td>
                     <td>{{ object.value }}</td>
+                    <td>{{ object.season }}</td>
                     <td>
                         <a href="{% url 'game:drivers:edit' object.pk %}" class="btn btn-sm btn-secondary">Edit</a>
                     </td>

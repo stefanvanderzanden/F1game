@@ -2,11 +2,21 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
+class Season(models.Model):
+    year = models.IntegerField(help_text='The year the race started')
+    active = models.BooleanField(default=False)
+
+    def __str__(self):
+        next_year = self.year + 1
+        return 'Season for the year {0}-{1}'.format(self.year, next_year)
+
+
 class Team(models.Model):
     name = models.CharField(max_length=120)
     value = models.IntegerField()
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+    season = models.ForeignKey('game.Season', related_name='teams', on_delete=models.CASCADE, null=True)
     order = models.IntegerField(help_text='Field to indicate the order of the teams')
 
     def __str__(self):
@@ -24,6 +34,7 @@ class Driver(models.Model):
     active = models.BooleanField(default=True,
                                  help_text='When a driver is not active for a race, this is to disable him')
     order = models.IntegerField(help_text='Field to indicate the order of the drivers within a team')
+    season = models.ForeignKey('game.Season', related_name='drivers', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return '{0} ({1})'.format(self.name, self.team.name)
@@ -36,14 +47,10 @@ class Race(models.Model):
     description = models.TextField(null=True, blank=True)
     date_updated = models.DateTimeField()
     image = models.ImageField(null=True, blank=True)
-
-    # circuitId = models.CharField(max_length=20, default='id')
-    # circuitNr = models.CharField(max_length=20, default='1')
-    # is_next_race=models.BooleanField(default=False)
-    # geupdate = models.BooleanField(default=False)
+    season = models.ForeignKey('game.Season', related_name='races', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.name
+        return '{0} ({1})'.format(self.name, self.season.year)
 
 
 class ScoreTable(models.Model):

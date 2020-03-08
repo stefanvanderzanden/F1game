@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
+from apps.game.models import Driver, Season
+
 
 class CreateAccountForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
@@ -14,18 +16,13 @@ class CreateAccountForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 
-# from django import forms
-# from django.forms.util import ErrorList
-# from django.contrib.auth.models import User
-# import time
-# from django.forms.extras.widgets import SelectDateWidget
-# from django.contrib.admin import widgets
-# from django.utils.safestring import mark_safe
-#
-#
-# from apps.users.models import *
-# from apps.game.models import Trivia
-#
+class DriverSelectForm(forms.Form):
+    driver = forms.ModelChoiceField(
+        queryset=Driver.objects.filter(
+            active=True, season__active=True).order_by('-value'),
+        empty_label=None
+    )
+
 # class CreateUserForm(forms.Form):
 #     GENDER = (
 #         ('M', 'Man'),

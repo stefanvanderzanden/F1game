@@ -5,25 +5,21 @@
         <div class="col-12">
             <div class="d-flex flex-row-reverse">
                 <div class="p-2">
-                    <a href="{% url 'game:drivers:add' %}" class="btn btn-light">Add</a>
+                    <a href="{% url 'game:seasons:add' %}" class="btn btn-light">Add</a>
                 </div>
             </div>
             <table class="table table-hover">
                 <tr>
-                    <th>Name</th>
-                    <th>Order</th>
-                    <th>Value</th>
-                    <th>Season</th>
+                    <th>Year</th>
+                    <th>Active</th>
                     <th>Actions</th>
                 </tr>
                 {% for object in object_list %}
                 <tr>
-                    <td>{{ object.name }}</td>
-                    <td>{{ object.order }}</td>
-                    <td>{{ object.value }}</td>
-                    <td>{{ object.season }}</td>
+                    <td>{{ object.year }}</td>
+                    <td>{{ object.active }}</td>
                     <td>
-                        <a href="{% url 'game:teams:edit' object.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                        <a href="{% url 'game:seasons:edit' object.pk %}" class="btn btn-sm btn-secondary">Edit</a>
                     </td>
                 </tr>
                 {% endfor %}

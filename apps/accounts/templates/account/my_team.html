@@ -1,5 +1,39 @@
 {% extends "base.html" %}
-{% block title  %}Homepage {% endblock %}
+{% load bootstrap4 %}
+
+
+{% block main_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <form action="" method="post">
+                {% csrf_token %}
+                    <div class="row">
+                        {% for value, text in form.driver.field.choices %}
+                        {% if value %}
+                            {# Ignore empty answer #}
+                            <div class="col-3" data-driver-value="{{ value }}">
+                                <div class="card">
+                                    {{ text }}
+                                </div>
+                            </div>
+                            {% if forloop.counter|divisibleby:4 %}
+                            </div>
+                            <div class="row">
+                            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
 {% block content %}
 <!--|intcomma-->
 
